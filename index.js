@@ -41,11 +41,3 @@ usuarioNuevo.addBook("Cien años de soledad","Gabriel García Márquez")
 usuarioNuevo.getBookNames()
 
 
-
-const libros= [
-    { nombre: 'Don Quijote de la Mancha', autor: 'Miguel de Cervantes' },
-    { nombre: 'El ruido y la furia', autor: 'William Faulkner' },
-    { nombre: 'La educación sentimental', autor: 'Gustave Flaubert' },
-    { nombre: 'Cien años de soledad', autor: 'Gabriel García Márquez' }
-  ]
-
