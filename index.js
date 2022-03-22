@@ -22,12 +22,12 @@ class usuario{
         console.log("Lista de libros actualizada :", this.libros)
     }
     getBookNames(){
-        const nombres =this.libros.nombre
+        const nombres =this.libros.map((libro) => libro.nombre)
         console.log("Nombres",nombres)
     }
 }
 
-const usuarioNuevo= new usuario("Mariana","Gimenez",["La señora Dalloway", "Harry Potter", "Al faro", "El amor en los tiempos del cólera"],["Sansu","Marilyn","Macha","Pinky"])
+const usuarioNuevo= new usuario("Mariana","Gimenez",[{nombre:"La señora Dalloway"}, {nombre:"Harry Potter"}, {nombre:"Al faro"},{nombre: "El amor en los tiempos del cólera"}],["Sansu","Marilyn","Macha","Pinky"])
 
 console.log(usuarioNuevo)
 usuarioNuevo.getFullName()
@@ -39,5 +39,6 @@ usuarioNuevo.addBook("El ruido y la furia","William Faulkner")
 usuarioNuevo.addBook("La educación sentimental","Gustave Flaubert")
 usuarioNuevo.addBook("Cien años de soledad","Gabriel García Márquez")
 usuarioNuevo.getBookNames()
+
 
 
