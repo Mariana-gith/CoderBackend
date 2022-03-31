@@ -11,15 +11,21 @@ class usuario{
     }
 
     addMascota(nueva){
-        this.mascotas.push(nueva)
-      console.log("Mascotas Nuevas :",this.mascotas)
+       const mascotasagregadas = []
+       mascotasagregadas.push(nueva)
+       this.mascotas.push(nueva)
+       console.log("Mascotas Nuevas :",mascotasagregadas)
+       console.log("Lista Nueva :", this.mascotas)
     }
     countMascotas(){
         console.log("cantidad de mascotas:", this.mascotas.length)
     }
     addBook(nombre,autor){
+        const libroNuevo = []
+        libroNuevo.push({nombre,autor})
         this.libros.push({nombre,autor})
         console.log("Lista de libros actualizada :", this.libros)
+        console.log("Libros Nuevo :", libroNuevo)
     }
     getBookNames(){
         const nombres =this.libros.map((libro) => libro.nombre)
@@ -42,3 +48,5 @@ usuarioNuevo.getBookNames()
 
 
 
+console.log(Object.values(usuarioNuevo))
+console.table(Object.entries(usuarioNuevo))
