@@ -1,23 +1,4 @@
-const fs = require ("fs")
-
-// fs.writeFile('prueba.txt', 'Algo...\n'.repeat(10), ()=>{ })
-
- 
-//  const  trabajoConArchivos =async ()=>{
-//     try{
-//        await fs.promises.writeFile('prueba2.txt', 'Algo asincronico...\n'.repeat(20))
-//         const datos = await fs.promises.readFile('prueba2.txt','utf-8')
-//         console.log(datos)
-//     }
-//     catch(err){
-//         console.log(err)
-//     }finally{
-//         console.log('termine')
-//     }    
-// }
-
-// trabajoConArchivos()
-// console.log(10+10)
+const fs = require('fs')
 
 
 const leerProductos = async (nombre) =>{
@@ -41,7 +22,7 @@ const borrarPorId = (array,id) =>{
 
 const producto =                                                                                                                                                  
 {                                                                                                                                                    
-  title: 'Escuadra',                                                                                                                                 
+  title: 'Lapiz',                                                                                                                                 
   price: 123.45,                                                                                                                                     
   thumbnail: 'https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png',                                     
 }
@@ -102,14 +83,5 @@ const producto =
     }
  }
  
- const ejecutar = async () =>{
-    const contenedor = new Contenedor('productos.txt')
-    console.log("Producto nuevo",await  contenedor.save(producto))
-    console.log("Producto elegido",await contenedor.getById(10))
-    console.log( "Todos Los Productos...",await contenedor.getAll())
-    console.log( "Productos actualizados...",await contenedor.deleteById(5))
-    //console.log( "Todos Los Productos......",await contenedor.deleteAll())
- }
 
- ejecutar()
-1
+module.exports.Contenedor=Contenedor
