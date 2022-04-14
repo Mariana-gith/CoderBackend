@@ -54,23 +54,26 @@ rutaProductos.put('/:id',(req,res)=>{
     })
 
 rutaProductos.delete('/:id',(req,res)=>{
-    const {id}= req.params
+    let {id}= req.params
     let producto = productos.find((p)=>{
         return p.id === parseInt( id)
     })
+    // if(!producto){
+    //     res.json({mensaje:"el producto no existe"})
+    // }
     if(!producto){
         res.json({mensaje:"no se encontraron productos disponibles"})
-    }
-    if(productos.length > 0){
+    }else{
         let nuevoArray = productos.filter((p)=>{
             return p.id != parseInt( id)
         })
         productos = nuevoArray
         console.log("productoss", productos)
         res.json({"Producto Eliminado" : producto})
-    }else{
-        res.json({mensaje:"no se encontraron productos disponibles"})
     }
+   
+
+    
 })
 
 module.exports =rutaProductos
