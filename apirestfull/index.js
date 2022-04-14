@@ -1,7 +1,6 @@
 const rutaProductos = require('./rutas/productos.js')
 const express = require('express')
 
-
 const app = express()
 
 

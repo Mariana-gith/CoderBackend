@@ -2,11 +2,14 @@ const { Router } = require("express");
 
 const rutaProductos = new Router()
 
-let productos = []
+let productos = require('../productosMemoria/productos.js')
+// let productos = [
+    
+//   ]
 
 
 rutaProductos.get('/', (req,res)=>{
-    res.json(productos)
+    res.json({Productos:productos})
 })
 
 rutaProductos.get('/:id',(req,res)=>{
@@ -17,7 +20,7 @@ rutaProductos.get('/:id',(req,res)=>{
     if(!producto){
         res.json({mensaje:"El producto no existe"})
     }else{
-        res.json({productoElegido:producto})
+        res.json({"Producto Elegido":producto})
     }
 })
 
@@ -36,28 +39,35 @@ rutaProductos.post('/', (req,res)=>{
 })
 
 rutaProductos.put('/:id',(req,res)=>{
-    let {id}= req.params
-    id = req.body.id
-    let nuevoProd = req.body 
-    req.body.id = req.params
-    let producto= productos.find(p=>{
-        return p.id == id
-    })
+        let {id}= req.params
+        let nuevoProd = req.body 
+        req.body.id =parseInt(id) 
 
-    producto= nuevoProd
-    console.log(nuevoProd)
-    res.json(nuevoProd)
-})
+        let producto= productos.splice(id= id-1 ,1,nuevoProd)
+        if(producto.length == 0){
+          return  res.json({mensaje:"El producto no existe"})
+        }
+        else{
+            
+            res.json({Modificado : producto})  
+        } 
+    })
 
 rutaProductos.delete('/:id',(req,res)=>{
     const {id}= req.params
+    let producto = productos.find((p)=>{
+        return p.id === parseInt( id)
+    })
+    if(!producto){
+        res.json({mensaje:"no se encontraron productos disponibles"})
+    }
     if(productos.length > 0){
         let nuevoArray = productos.filter((p)=>{
             return p.id != parseInt( id)
         })
         productos = nuevoArray
         console.log("productoss", productos)
-        res.json(nuevoArray)
+        res.json({"Producto Eliminado" : producto})
     }else{
         res.json({mensaje:"no se encontraron productos disponibles"})
     }
