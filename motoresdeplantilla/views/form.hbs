@@ -1,0 +1,29 @@
+ {{>nav}}
+ <div class="container">
+        <div class="row">
+          <div class="col-12">
+              <h1 class="center">Ingresa un Producto</h1>
+              </br>
+            <form action="/hbs/form" method="post">
+                <div class="row">
+                    <div class="col">
+                      <input type="text" name="nombre" class="form-control" placeholder="Nombre del Producto" aria-label="First name">
+                    </div>
+                    <div class="col">
+                      <input type="number" name="precio" class="form-control" placeholder="Precio">
+                    </div>
+                    <div class="col">
+                      <input type="url" name="foto" class="form-control" placeholder="Foto">
+                    </div>
+                </br>
+                    <hr class="my-4">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-outline-primary">Cargar Productos</button>
+                        <a class="btn btn-outline-success" href="/hbs" role="button">Volver</a>
+                    </div>
+                  </div>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
