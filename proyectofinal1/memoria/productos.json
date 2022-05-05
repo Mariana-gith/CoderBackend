@@ -1,11 +1,4 @@
 [
-  [
-    {
-      "title": "werwerertre",
-      "price": " 123.45",
-      "thumbnail": "'foto"
-    }
-  ],
   {
     "title": "werwerertre",
     "price": " 123.45",
@@ -13,21 +6,15 @@
     "id": 2
   },
   {
-    "title": "asdas",
+    "title": "eeeeee",
     "price": " 123.45",
     "thumbnail": "'foto",
     "id": 3
   },
   {
-    "title": "asdas",
+    "title": "werwerertre",
     "price": " 123.45",
     "thumbnail": "'foto",
-    "id": 5
-  },
-  {
-    "title": "asdas",
-    "price": " 123.45",
-    "thumbnail": "'foto",
-    "id": 6
+    "id": 4
   }
 ]
