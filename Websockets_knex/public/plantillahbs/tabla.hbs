@@ -1,0 +1,30 @@
+<style>
+    .table td,
+    .table th {
+        vertical-align: middle;
+    }
+</style>
+
+{{#if productos.length}}
+<h2 >Lista de Productos</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr class="thead-dark">
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Foto</th>
+        </tr>
+        {{#each productos}}
+        <tr>
+            <td>{{this.nombre}}</td>
+            <td>{{this.precio}}</td>
+            <td> <img style="width: 9%;" src="{{this.foto}}"></td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
+{{ else }}
+<h3 class="alert alert-dark">No hay productos</h3>
+{{/if}}
+
+<img src="" alt="" srcset="">
