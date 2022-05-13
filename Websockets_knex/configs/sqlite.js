@@ -1,11 +1,12 @@
+import knex from "knex";
+
 const sqlite = {
     client: 'sqlite3',
     connection: {
-      filename: "./DB/ecommerce.sqlite"
+      filename: "./db/ecommerce.db3"
     },
     useNullAsDefault: true
   }
-  
-  export {
-    sqlite
-  }
+ 
+ 
+export default sqlite

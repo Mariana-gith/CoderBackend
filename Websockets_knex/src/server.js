@@ -1,9 +1,17 @@
-const express = require('express');
-const app = express();
-const http = require('http');
+
+import mysql from "../configs/mysql.js";
+import  configsqlite  from "../configs/sqlite.js";
+import ContenedoKnex from "../ContenedorKanex.js";
+
+import express from "express";
+import http from "http"
+const app = express()
 const serverHttp = http.createServer(app);
-const { Server : IOserver } = require("socket.io");
-const io = new IOserver(serverHttp);
+import {Server}  from "socket.io"
+import knex from "knex";
+const io = new Server(serverHttp);
+
+const productosMysql = new ContenedoKnex("ecommerceknexbd", mysql)
 
 
 app.use(express.static('public'))
@@ -11,21 +19,48 @@ app.use(express.static('public'))
 const productos = []
 const mensajes = []
 
-
 io.on('connection',(socket)=>{
     socket.emit('productos',productos)
     socket.emit('mensaje', mensajes)
-
+    
     socket.on('cargar',producto =>{
-        productos.push(producto)
-        io.sockets.emit('productos',productos)
+        productosMysql.save(producto)
+        .then(()=>{
+            console.log('Registro Ok!!')
+        })
+    .catch((err)=>{
+        console.log(err)
     })
-    socket.on("nuevoMensaje", mensaje =>{
-        mensaje.fecha = new Date().toLocaleString()
-        mensajes.push(mensaje)
-        io.sockets.emit('mensaje',mensajes)
-    })
+    productos.push(producto)
+    io.sockets.emit('productos',productos)
+})
+socket.on("nuevoMensaje",async (mensaje) =>{
+    mensaje.fecha = new Date().toLocaleString()
+    mensajes.push(mensaje)
+    io.sockets.emit('mensaje',mensajes)
+   await configsqlite("mensajes").insert(mensaje)
+})
     console.log(productos)
+})
+
+//Crear
+app.post("/", (req,res)=>{
+    let data ={
+        nombre:req.body.nombre,
+        precio:req.body.precio,
+        precio:req.body.precio
+       }
+       productosMysql.save(data)
+        .then((data)=>{
+            res.send('Registro Ok!!')
+    })
+    .catch((err)=>{
+        res.send(err)
+    })
+})
+
+app.get("/crear",(req,res)=>{
+    res.send("creado")
 })
 
 
