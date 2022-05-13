@@ -12,6 +12,7 @@ import knex from "knex";
 const io = new Server(serverHttp);
 
 const productosMysql = new ContenedoKnex("ecommerceknexbd", mysql)
+const productossqlite = new ContenedoKnex("mensajes", configsqlite)
 
 
 app.use(express.static('public'))
@@ -35,10 +36,10 @@ io.on('connection',(socket)=>{
     io.sockets.emit('productos',productos)
 })
 socket.on("nuevoMensaje",async (mensaje) =>{
+    productossqlite.save(mensaje)
     mensaje.fecha = new Date().toLocaleString()
     mensajes.push(mensaje)
     io.sockets.emit('mensaje',mensajes)
-   await configsqlite("mensajes").insert(mensaje)
 })
     console.log(productos)
 })
