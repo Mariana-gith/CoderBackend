@@ -7,11 +7,11 @@ const io = new IOserver(serverHttp);
 
 
 app.use(express.static('public'))
-
+    
 const productos = []
 const mensajes = []
 
-
+    
 io.on('connection',(socket)=>{
     socket.emit('productos',productos)
     socket.emit('mensaje', mensajes)

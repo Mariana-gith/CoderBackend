@@ -1,0 +1,79 @@
+
+
+
+use ecommerce
+
+----
+db.createCollection("Productos")
+db.createCollection("Mensajes")
+
+----
+Agregar 10 documentos con valores distintos a las colecciones mensajes y productos. 
+El formato de los documentos debe estar en correspondencia con el que venimos utilizando en el entregable con base de datos MariaDB. 
+
+
+db.Mensajes.insertMany([{usuario:"Mariana",mensaje:"Hola, como va??" },{usuario:"Nicolas",mensaje:"todo bien, vos?"}])
+db.Productos.insertMany([{nombre:"PC",descripcion:"LED",precio:120},{nombre:"pantalla",descripcion:"Plana",precio:900},
+{nombre:"Auriculares",descripcion:"inalambrico",precio:1280},{nombre:"Monitor",descripcion:"45''",precio:580},
+{nombre:"PC",descripcion:"LED",precio:4990},{nombre:"PC",descripcion:"LED",precio:4320},
+{nombre:"PC",descripcion:"LED",precio:3350},{nombre:"PC",descripcion:"LED",precio:2800},
+{nombre:"PC",descripcion:"LED",precio:2300},{nombre:"PC",descripcion:"LED",precio:1700} ]) 
+
+----
+
+Listar todos los documentos en cada colección.
+
+
+db.Productos.find()
+db.Menssajes.find()
+
+
+
+----
+
+Mostrar la cantidad de documentos almacenados en cada una de ellas.
+
+
+
+db.Productos.count()
+db.Menssajes.count()      
+
+-----
+
+Realizar un CRUD sobre la colección de productos
+
+
+ db.Productos.insertOne({ "nombre" : "silla", "descripcion" : "Gamer", "precio" :5000}) 
+
+ db.Productos.find({"precio":{$lt:1000}}) //productos con precio menor a 1000 pesos.
+
+ db.Productos.find({"precio":{$lt:1000},precio:{$gt:3000}})  // productos con precio entre los 1000 a 3000 pesos.
+ 
+ db.Productos.find({"precio":{$gt:3000}}) // Listar los productos con precio mayor a 3000 pesos.
+
+ db.Productos.find({},{nombre:1}).sort({precio:-1}).skip(10).limit(1) // Realizar una consulta que traiga sólo el nombre del tercer producto más barato.
+
+----
+Hacer una actualización sobre todos los productos, agregando el campo stock a todos ellos con un valor de 100.---
+
+db.Productos.updateMany({},{$set:{stock: 100}}) 
+
+
+----
+Cambiar el stock a cero de los productos mayores a 4000 pesos.
+
+ db.Productos.updateMany({"precio":{$gt:4000}},{$set:{stock:0}})
+
+
+----
+Borrar productos con precio menor a 1000 pesos.
+
+ db.Productos.deleteMany({"precio":{$lt:1000}})
+
+
+
+----
+Crear un usuario 'pepe' clave: 'asd456' que sólo pueda leer la base de datos ecommerce. Verificar que pepe no pueda cambiar la información.
+----
+
+db.createUser({user:"pepe",pwd:"asd456", roles: [{role:"read",db:"ecommerce"}]})

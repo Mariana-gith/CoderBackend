@@ -1,9 +1,9 @@
-import knexcont from "knex";
+import knex from "knex";
 
 class ContenedoKnex{
-    Constructor(tabla,config){
+    constructor(tabla,config){
         this.tabla=tabla
-        this.knex=knexcont(config)
+        this.knex=config
     }
     
     async save(data){

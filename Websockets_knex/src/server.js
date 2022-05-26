@@ -11,8 +11,8 @@ import {Server}  from "socket.io"
 import knex from "knex";
 const io = new Server(serverHttp);
 
-const productosMysql = new ContenedoKnex("ecommerceknexbd", mysql)
-const productossqlite = new ContenedoKnex("mensajes", configsqlite)
+const productosMysql = new ContenedoKnex("productos", mysql)
+const mensajesssqlite = new ContenedoKnex("mensajes", configsqlite)
 
 
 app.use(express.static('public'))
@@ -27,19 +27,24 @@ io.on('connection',(socket)=>{
     socket.on('cargar',producto =>{
         productosMysql.save(producto)
         .then(()=>{
-            console.log('Registro Ok!!')
+            console.log('Registro producto Ok!!')
         })
-    .catch((err)=>{
-        console.log(err)
-    })
+        .catch((err)=>{
+            console.log(err)
+        })
     productos.push(producto)
     io.sockets.emit('productos',productos)
 })
 socket.on("nuevoMensaje",async (mensaje) =>{
-    productossqlite.save(mensaje)
-    mensaje.fecha = new Date().toLocaleString()
     mensajes.push(mensaje)
     io.sockets.emit('mensaje',mensajes)
+    mensajesssqlite.save(mensaje)
+    .then(()=>{
+        console.log('Registro mensaje Ok!!')
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
 })
     console.log(productos)
 })
@@ -53,7 +58,7 @@ app.post("/", (req,res)=>{
        }
        productosMysql.save(data)
         .then((data)=>{
-            res.send('Registro Ok!!')
+            res.send('Registro producto Ok!!')
     })
     .catch((err)=>{
         res.send(err)

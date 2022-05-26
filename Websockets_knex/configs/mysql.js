@@ -32,13 +32,7 @@ knexmysql.schema.hasTable('productos')
             console.log("la tabla ya existe")
         }
     })
-    .finally(()=>{
-        knexmysql.destroy()
-    })
-
-
-
-
+    
 
 export default knexmysql
 
