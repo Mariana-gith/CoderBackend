@@ -2,14 +2,14 @@ import { normalize ,schema } from "normalizr";
 import util  from 'util'
 
 const normalizador = (mensajeria) =>{
-    const autorSchema = new schema.Entity('autor',{idAttribute: 'id'})
+    const autorSchema = new schema.Entity('autor')
     const mensajeSchema = new schema.Entity('mensaje')
-    const mansajeriaSchema = new schema.Entity('mensajes',{
+    const mansajeriaSchema = new schema.Entity('mensajeria',{
         autor:autorSchema,
         mensaje:mensajeSchema
     })
     const postSchema = new schema.Entity('posteo',{
-        mensajes:[mansajeriaSchema]
+        mensajeria:[mansajeriaSchema]
     })
 
     const print = (obj) =>{

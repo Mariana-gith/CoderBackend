@@ -33,8 +33,13 @@ socket.on("nuevoMensaje",async (mensaje) =>{
     .catch((err)=>{
         console.log(err)
     })
-    const todos = await mensajesFire.getAll()
-    const normalizado = normalizador(todos)
+    const result = []
+    const todos = await mensajesFire.getAll();
+    todos.forEach(doc => {
+        result.push({ id: doc.id, ...doc.todos})})
+    
+    let objetOrigin = {id:"007", mensajes: result}
+    const normalizado = normalizador(objetOrigin)
     console.log("normalizado Desde server",normalizado)
 
 })
