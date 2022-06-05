@@ -22,11 +22,11 @@ const enviarMensaje = () =>{
     const inputoAutorNombre = document.getElementById("inputoAutorNombre")
     const inputoAutorApellido = document.getElementById("inputoAutorApellido")
     const inputoAutorEdad = document.getElementById("inputoAutorEdad")
-    const inputoAutorAlias = document.getElementById("inputoAutorAlias")
+    const inputoAutorMail = document.getElementById("inputoAutorMail")
     if(inputMensaje.value && inputoAutorNombre.value ){
         const mensaje = {
         autor:{
-            id: inputoAutorAlias.value,
+            mail: inputoAutorMail.value,
             Nombre: inputoAutorNombre.value, 
             apellido: inputoAutorApellido.value, 
             edad: inputoAutorEdad.value, 
