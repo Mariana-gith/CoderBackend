@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./templates/head") %>
+<body>
+  <%- include("./templates/nav")%>
+  <div>
+  </div>
+    
+   <h1 padding-right: $padding-x>Lista de Productos de <%- bienvenid%> <a class="btn btn-outline-success" href="/saliendo"role="button">Logout</a></h1> 
+    <table class="table table-success table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">NOMBRE</th>
+          <th scope="col">PRECIO</th>
+          <th scope="col">FOTO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(function(p){%>
+        <tr>
+          <th scope="row"><%=p.id%> </th>
+          <td><%=p.nombre%>
+            <%if(p.nombre === "") {%>
+              <p>No se encontro el producto</p>
+            <%}%></td>
+          <td> $<%=p.precio%></td>
+          <td  ><img src="<%=p.foto%>"  width="100"></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <a class="btn btn-outline-success" href="/home" role="button">ir a home</a>
+    <a class="btn btn-outline-success" href="/productos-test" role="button">Recargar</a>
+</html>
