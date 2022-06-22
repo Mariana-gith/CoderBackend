@@ -15,3 +15,15 @@ export function crearErrorNoEncontrado() {
     error.tipo = 'NOT_FOUND'
     return error
 }
+
+export function asegurarNombreUnico() {
+    const error = new Error('el nombre de usuario no está disponible')
+    error.tipo = 'NOT_FOUND'
+    return error
+}
+
+export function errorId() {
+    const error = new Error('no se encontro usuario con ese id')
+    error.tipo = 'NOT_FOUND'
+    return error
+}

@@ -18,5 +18,6 @@ export const crearUsuario =(datos)=>{
         password :datos.password,
         addres:datos.address
     }
+    console.log(usuario)
     return usuario
 }

@@ -1,10 +1,9 @@
 import { Router } from 'express'
 
-import { usuarioController } from '../controllers/controllerUsuario.js'
+import { getUsuarios } from '../controllers/controllerUsuario.js'
 
-const usuariosRouter = Router()
+const usuariosRouter = new Router()
 
-usuariosRouter.post('/', usuarioController.post)
-usuariosRouter.get('/', usuarioController.get)
+usuariosRouter.get("/",getUsuarios)
 
-export default usuariosRouter
+export default  usuariosRouter

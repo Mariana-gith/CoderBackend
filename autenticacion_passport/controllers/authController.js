@@ -1,37 +1,36 @@
-import dataBaseUsuario from "../data/dataBaseUsuario.js"
-import { crearErrorAutenticacion } from "./errorsController.js"
+import passport from "passport";
 
 
- const autenticar = async(username,password) =>{
-    let usuario
-    try {
-        usuario = await dataBaseUsuario.obtenerPorNombre(username)
-    } catch (error) {
-        throw crearErrorAutenticacion()        
-    }
+export const registrationControler = passport.authenticate('registro',{
+    failureRedirect:'/auth/failRegistrer',
+    successRedirect: '/auth/registrarSuccess'
+}) 
 
-    if(password !== password){
-        throw crearErrorAutenticacion()
-    }
-    return usuario
+export const loginControler = passport.authenticate('login',{
+    failureRedirect:'/auth/loginFail',
+    successRedirect: '/auth/loginSuccess'
+}) 
+
+export const successRegistrerCOntroller = (req,res) =>{
+    res.json({msj: "OK"})
 }
 
-const authRouter={ 
-    login: async (req,res,next)=>{
-        const {username,password}= req.body
-        try {
-           const usuario= await autenticar(username,password)
-            req.session.username =username
-            req.session.mensaje= `Bienvenid@ ${username}`
-            res.sendStatus(200)
-        } catch (error) {
-            next(error)
-        }
-    },
-    logout : async (req,res,next)=>{
-        req.session.destroy()
-        res.sendStatus(200)
-    }
+export const failRegistrerCOntroller = (req,res) =>{
+    res.json({err:'Fallo el REGISTRO'})
 }
 
-export default authRouter
+export const successLoginCOntroller = (req,res) =>{
+    res.json({msj: "OK"})
+}
+
+export const failLoginController = (req,res) =>{
+    res.json({err:'Fallo el LOGIN'})
+
+}
+
+export const logoutController = (req,res) =>{
+    if(req.isAuthenticated()){
+        req.logOut()
+    }
+    res.sendStatus(200)
+}
