@@ -1,15 +1,18 @@
 import {obtenerPorNombre} from "../data/dataBaseUsuario.js"
 
-export const autenticar = (nombre, password) =>{
-    let usuario
+export const autenticar =  (nombre, password) =>{
     try{
-        const usuario = obtenerPorNombre(nombre) 
+        console.log("entre a autenticar")
+        const usuario =  obtenerPorNombre(nombre) 
+        if(usuario.password !== password ){
+            console.log("usuario authApi",usuario)
+            console.log("password incorrecto")
+            throw new Error("Fallo la autenticacion")
+        }
+        console.log("usuario authApi",usuario)
+        return usuario
     }catch(error){
         throw new Error("Fallo la autenticacion")
     }
-    if(usuario.password !== password ){
-        throw new Error("Fallo la autenticacion")
-    }
-    return usuario
 
 }

@@ -25,14 +25,13 @@ const enviarMensaje = () =>{
     const inputoAutorMail = document.getElementById("inputoAutorMail")
     if(inputMensaje.value && inputoAutorNombre.value ){
         const mensaje = {
-        autor:{
-            mail: inputoAutorMail.value,
-            Nombre: inputoAutorNombre.value, 
-            apellido: inputoAutorApellido.value, 
-            edad: inputoAutorEdad.value, 
-        },
-        Mensaje:  inputMensaje.value,
-       
+            autor:{
+                mail: inputoAutorMail.value,
+                Nombre: inputoAutorNombre.value, 
+                apellido: inputoAutorApellido.value, 
+                edad: inputoAutorEdad.value, 
+            },
+            Mensaje:  inputMensaje.value,
         }
         
         socket.emit("nuevoMensaje",mensaje)

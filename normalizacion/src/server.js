@@ -22,11 +22,9 @@ const mensajesFire = new ContenedorFirebase('mensajes')
 
 io.on('connection',(socket)=>{
 socket.emit('mensaje', mensajes)
-
 socket.on("nuevoMensaje",async (mensaje) =>{
     mensajes.push(mensaje)
-    io.sockets.emit('mensaje',mensajes)
-    await mensajesFire.save(mensaje)
+    const nuevoMsj= await mensajesFire.save(mensaje)
     .then(()=>{
         console.log('Registro mensaje Ok!!')
     })
@@ -37,11 +35,12 @@ socket.on("nuevoMensaje",async (mensaje) =>{
     const todos = await mensajesFire.getAll();
     todos.forEach(doc => {
         result.push({ id: doc.id, ...doc.todos})})
-    
-    let objetOrigin = {id:"007", mensajes: result}
-    const normalizado = normalizador(objetOrigin)
-    console.log("normalizado Desde server",normalizado)
-
+        
+        let objetOrigin = {id:"007", mensaje}
+        const normalizado = normalizador(objetOrigin)
+        console.log("normalizado Desde server",normalizado)
+        io.sockets.emit('mensaje',nuevoMsj,result,objetOrigin,normalizado)
+        
 })
 })
 

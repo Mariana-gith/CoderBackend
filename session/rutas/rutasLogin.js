@@ -26,5 +26,4 @@ app.use(
     
     
     rutasLogin.get("/",(req,res)=>{
-        
     })

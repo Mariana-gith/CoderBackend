@@ -25,12 +25,7 @@ app.use(
         saveUninitialized:false                
     }))
     
-    app.get("/login",(req,res)=>{
-        res.render("login")
-        let user = req.session.nombre
-
-    })
-
+    
     app.get("/home",(req,res)=>{
         if( req.session.admin===true){
             let username = req.session.nombre
@@ -40,7 +35,13 @@ app.use(
             res.render("home",{bienvenid:"Invitad@"})
         }
     })
+    
+    app.get("/login",(req,res)=>{
+        res.render("login")
+        let user = req.session.nombre
 
+    })
+    
     app.post("/login",(req,res)=>{
         let username = req.body.nombre
         if(username !=="Mariana"){
@@ -69,6 +70,7 @@ app.use(
             })
         },3000)
     })
+
 
 
 let arrayPersonas = []

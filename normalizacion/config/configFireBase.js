@@ -6,5 +6,6 @@ const serviceAccount = JSON.parse(fs.readFileSync("./db/normalizr-dffd7-firebase
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    // databaseURL: "https://carbon-nucleus-264418.firebaseio.com"
 });
+
+export default configfire
