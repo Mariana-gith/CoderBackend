@@ -18,7 +18,7 @@
     <div class="container-fluid ">
         <h2 >Chat</h2>
         <div class="conteiner">
-            <form >
+            <form onsubmit="event.preventDefault(); enviarMensaje();">
                 <div class="mb-3 col-2">
                     <input type="text" class="form-control"  placeholder="Nombre Usuario" id="inputoAutorNombre">
                 </div>
@@ -29,13 +29,12 @@
                     <input type="number" class="form-control"  placeholder="Apellido Usuario" id="inputoAutorEdad">
                 </div>
                 <div class="mb-3 col-5">
-                    <input type="email" class="form-control"  placeholder="Email Usuario" id="inputoAutorAlias">
+                    <input type="email" class="form-control"  placeholder="Email Usuario" id="inputoAutorMail">
                 </div>
                 <div class="mb-2 col-4">
                     <textarea  type="text" class="form-control" rows="3"placeholder="Deja tu mensaje" id="inputoMensaje"></textarea>
                 </div>
-                <!-- <button onclick= enviarMensaje()>enviar</button> -->
-                <button type="submit" onclick=" enviarMensaje();">ENVIAR</button>
+                <button type="submit" >ENVIAR</button>
             </form>
             <button>
                <a class="btn " href="/api" role="button">ir a home</a>
