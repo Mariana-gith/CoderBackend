@@ -1,0 +1,4 @@
+
+
+pm2 start server.js --name="Server3" -i max  -- 8081  //Modo Cluster
+pm2 start server.js --name="Server2"  -- 8080   // Modo fork
