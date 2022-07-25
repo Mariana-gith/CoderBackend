@@ -1,13 +1,14 @@
-import express from "express"
-import cluster from 'cluster'
-import http from 'http'
+const express = require("express")
+const cluster = require('cluster')
+const {http} = require('http')
 
-import process from 'process'
-import os from 'os'
+const process =require('process')
+const os =require('os')
 
-import random from "./rutas/randomRuta.js"
+console.log("ARGV: ", process.argv);
 
-const port = parseInt(process.argv[2]) || 8080
+const port = 8080
+
 const numCPUs = os.cpus().length
 
 
@@ -27,15 +28,19 @@ app.get("/randoms", (req,res)=>{
         return Math.floor(Math.random() * max)
     }
     const numeroRandom = JSON.stringify(getRandom(cant))
-    res.send({numeros:numeroRandom})
+    res.send({numeros:numeroRandom, pid: process.pid})
 })
 
 
 if (cluster.isPrimary) {
     console.log(`PID PRIMARIO ${process.pid}`)
 
-    for (let i = 0; i < numCPUs; i++) {
-        cluster.fork()
+
+    for (let i = 0; i < 4; i++) {
+        const childEnv = {
+            port: parseInt(process.argv[2+i])
+        }
+        cluster.fork(childEnv)
     }
 
     // cluster con balanceo de carga usando estrategia:
@@ -46,7 +51,8 @@ if (cluster.isPrimary) {
         cluster.fork()
     })
 } else {
-  app.listen(port,()=>{
+    
+  app.listen(process.env.port,()=>{
     console.log(`server ${process.pid} started`)
   })
 }
