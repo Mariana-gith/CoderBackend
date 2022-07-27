@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/socket.io/socket.io.js"></script>
+    <title>WappMariana</title>
+</head>
+<body>
+    <hr class="my-4">
+    <div class="container-fluid ">
+        <h2 >Chat</h2>
+        <div class="conteiner">
+            <form >
+                <div class="mb-3 col-2">
+                    <input type="text" class="form-control"  placeholder="Nombre Usuario" id="inputoAutor">
+                </div>
+                <div class="mb-2 col-4">
+                    <textarea  type="text" class="form-control" rows="3"placeholder="Deja tu mensaje" id="inputoMensaje"></textarea>
+                </div>
+                <!-- <button onclick= enviarMensaje()>enviar</button> -->
+                <button type="submit" onclick=" enviarMensaje();">ENVIAR</button>
+            </form>
+        </div>
+        <div class="container">
+            <div id="mensajesHtml"></div>
+        </div> 
+    </div>
+</body>
+<script src="js/index.js"></script>
+</html>
