@@ -1,0 +1,24 @@
+
+
+pm2 start cluster.js --name="Cluster" -i max  --  -- 8081  //Modo Cluster
+pm2 start cluster.js --name="serverNginx" -- -- 8082 8083 8084 8085 //cluster de servidores gestionado desde nginx
+
+
+
+pm2 start server.js --name="Fork" --watch --  -- 8080   // Modo fork
+pm2 start server.js --name="Fork" --watch  -i max -- -- 8080   // Modo fork
+
+
+// Artillery
+
+artillery quick --count 50 -n 20 http://localhost:8082/info> result_fork.txt
+artillery quick --count 50 -n 20 http://localhost:8082/info > result_profinfo.txt
+artillery quick --count 50 -n 20 http://localhost:8082/info > result_profinfo_inspect.txt
+
+//Comandos perfilamiento del servidor
+
+node --prof ./rutas/infoRutas.js 
+node --prof-process isolate-000001C00F0DC650-30428-v8.log > result_prof.txt
+node --inspect ./rutas/infoRutas.js
+
+
