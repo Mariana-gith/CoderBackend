@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./templates/head.ejs') %>
+   
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container" >
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown link
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+ <div class="container">
+            <div>
+              <h1>Carrito</h1> 
+              <table class="table table-success table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">PRECIO</th>
+                    <th scope="col">FOTO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% data.forEach(function(p){%>
+                  <tr>
+                    <th scope="row"><%=p.id%> </th>
+                    <td><%=p.name%>
+                      <%if(p.name === "") {%>
+                        <p>No se encontro el producto</p>
+                        <%}%></td>
+                        <td> $<%=p.price%></td>
+                        <td><img src=  ></td>
+                        <td>
+                          <form action=" /api/shoppingcartproducts/<%=p.id%>" method="post">
+                            <button
+                              name="id"
+                              value=<%=p.id%>
+                              type="submit"
+                              class="btn btn-info"
+                              style="margin-left: 630px;"
+                            >
+                              X
+                            </button>
+                          </form>
+                        </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+            <a class="btn btn-outline-success" href="/api/orders" role="button">Terminar la Compra</a>
+            <a class="btn btn-outline-success" href=" /api/products" role="button">Ir a productos</a>
+        </div>
+    </div>
+</div> 
+</body>
+</html>
