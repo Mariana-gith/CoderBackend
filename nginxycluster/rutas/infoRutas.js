@@ -1,4 +1,7 @@
 import { Router } from 'express'
+import compression from 'compression'
+
+
 import {mostrarArg,
         mostrarPid,
         mostrarPlataf,
@@ -8,7 +11,7 @@ import {mostrarArg,
 
 const infoRutas = new Router()
 
-infoRutas.get("/",(req,res)=>{
+infoRutas.get("/",compression(),(req,res)=>{
     res.render("info",{
         mostrarArg,
         mostrarPid,

@@ -52,7 +52,7 @@ if (cluster.isPrimary) {
     })
 } else {
     
-  app.listen(process.env.port,()=>{
+  app.listen(process.env.PORT,()=>{
     console.log(`server ${process.pid} started`)
   })
 }

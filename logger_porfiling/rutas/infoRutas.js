@@ -29,9 +29,9 @@ app.get("/info",compression(),(req,res)=>{
 
 
 
-app.listen(8082,()=>{
-    console.log("server ok",8082)
-})
+// app.listen(8082,()=>{
+//     console.log("server ok",8082)
+// })
 
 
 

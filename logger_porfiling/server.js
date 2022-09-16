@@ -33,6 +33,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 
-app.listen(8080,()=>{
-    logger.info("server OK!",8080)
+app.listen(process.env.PORT,()=>{
+    logger.info("server OK!",process.env.PORT)
 })

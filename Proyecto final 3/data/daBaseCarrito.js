@@ -1,15 +1,8 @@
-let carro = []
+import CarritoDAO from '../daos/CarritoDAO.js'
 
-export const agregarACarrito = ( carrito = {productos:[]} ) => {
-    let carritos ={
-        id: carrito.length + 1,
-        producto:carrito
-    }
-    carro.push(carritos)
+
+const carritoDao = new CarritoDAO()
+
+export const obtenerTodos= () =>{
+    return carritoDao.getAll()
 }
-
-export const eliminarProductoDeCarrito = (name) => {
-    carrito = carrito.filter((producto) => producto.name !== name);
-}
-
-export const obtenerProductosCarrito = () => carrito

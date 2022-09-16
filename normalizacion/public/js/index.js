@@ -3,7 +3,7 @@ const socket = io()
 
 const mostrarMensajes = (mensajes) =>{
     const mensajesMostrar = mensajes.map((m) =>{
-        return `<p> <strong> ${ m.inputoAutorNombre} </strong> :  ${ m.inputMensaje}</p>`
+        return `<p> <strong> ${ m.autor.Nombre} </strong> :  ${ m.Mensaje}</p>`
     }).join(" ")
    
     const listaMensajes = document.getElementById('mensajesHtml')
@@ -26,7 +26,7 @@ const enviarMensaje = () =>{
     if(inputMensaje.value && inputoAutorNombre.value ){
         const mensaje = {
         autor:{
-            mail: inputoAutorMail.value,
+            id: inputoAutorMail.value,
             Nombre: inputoAutorNombre.value, 
             apellido: inputoAutorApellido.value, 
             edad: inputoAutorEdad.value, 
