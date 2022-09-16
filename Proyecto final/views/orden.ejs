@@ -37,7 +37,7 @@
 </nav>
  <div class="container">
             <div>
-              <h1>Orden de   <%=usuario%> ♥ </h1> 
+              <h1>Ordenes de <%=usuario%> ♥ </h1> 
               <table class="table table-success table-striped table-hover">
                 <thead>
                   <tr>
@@ -48,9 +48,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <% data.forEach(function(p){%>
+                  <% data.forEach(function(orden){%>
                   <tr>
-                    <th scope="row"><%=p.id%> </th>
+                    <th scope="row"><%=orden.id%> </th>
                     <td><%=p.name%>
                       <%if(p.name === "") {%>
                         <p>No se encontro el producto</p>

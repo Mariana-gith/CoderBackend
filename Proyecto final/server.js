@@ -40,11 +40,14 @@ app.use(express.urlencoded({extended:false}))
 
 
 
-const PORT = parseInt(process.argv[2]) || 8080
 
+ const PORT= process.env.PORT||8080
+// console.log("process.env.PORT",process.env.PORT)
 
-
-
-app.listen(PORT,()=>{
-    logger.info("server OK!",PORT)
-})
+// app.listen(PORT,()=>{
+//     logger.info("server OK!",PORT)
+// })
+const server = app.listen(process.env.PORT,() => {
+    const port = server.address().port;
+    console.log(`Server OK!! ${port}`);
+  });

@@ -1,6 +1,5 @@
 import CarritoDAO from '../daos/CarritoDAO.js'
 
-
 const carritoDao = new CarritoDAO()
 
 export const carroNuevo = async ( carrito = { productos:[], usuario: "" } ) => {
@@ -16,12 +15,10 @@ export const obtenerPorUsuario = async ( usuario ) => {
 }
 
 export const obtenerPorId = (id) =>{
-    const porId = carritoDao.deleteById(id)
-    return porId
+    return carritoDao.getById(id)
 }
 
-
-export const borrarProducto = (id) =>{
+export const borrarCarrito = (id) =>{
     const borrado= carritoDao.deleteById(id)
     return borrado 
 }
