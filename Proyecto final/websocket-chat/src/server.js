@@ -1,7 +1,7 @@
 import express from "express";
-import MensajesDAO from "../../daos/MensajesDAO.js"
 import logger from "../../logger/logger.js"
 
+import {obtenerTodosMensajes,guardarMensaje} from "../../data/dataBaseMensajes.js"
 
 
 import http from "http"
@@ -21,29 +21,31 @@ app.use(express.static('public'))
 // app.set("view engine","ejs")
 
 
-const mensajesDAO = new MensajesDAO()
 
 
-io.on('connection',(socket)=>{
+io.on('connection',async (socket)=>{
 
-socket.emit('mensaje', mensajes)
+    const mensajes = await obtenerTodosMensajes()
+    socket.emit('mensaje', mensajes)
 
-socket.on("nuevoMensaje",async (mensaje) =>{
-    const mensajes = await mensajesDAO.getAll()
-    mensajes.push(mensaje)
-    io.sockets.emit('mensaje',mensajes)
-    await mensajesDAO.save(mensaje)
-    .then(()=>{
-        logger.info('Registro mensaje Ok!!')
-    })
-    .catch((err)=>{
-        logger.warning(err)
-    })
+    socket.on("nuevoMensaje",async (mensaje) =>{
+        await guardarMensaje(mensaje)
+        mensajes.push(mensaje)
+        io.sockets.emit('mensaje',mensajes)
+        .then(()=>{
+            logger.info('Registro mensaje Ok!!')
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
 
     })
 })
 
+const PORT = process.env.PORT || 8081
 
-serverHttp.listen(8081,()=>{
-    logger.info('server OK', 8081)
+
+serverHttp.listen(PORT,()=>{
+    logger.info('server OK', PORT)
 })
+
