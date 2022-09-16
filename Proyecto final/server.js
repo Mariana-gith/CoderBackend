@@ -1,5 +1,10 @@
 import express from "express"
 
+import { Server } from 'socket.io';
+import express from 'express';
+import { createServer } from 'http';
+
+
 import {session } from './middleware/session.js'
 import { passportMiddleware, passportSession } from './middleware/passport.js'
 
@@ -11,11 +16,14 @@ import infoRutas from "./rutas/infoRutas.js"
 import productosRuta from "./rutas/productosRuta.js"
 import carritoRuta from "./rutas/carritosRutas.js"
 import orderRutas from "./rutas/orderRutas.js"
+import MensajesdaosMongodb from "./daos/mensajesDAO.js";
 
 
-import logger from "./logger/logger.js"
 
-const app = express()
+
+const app = express(); 
+let server = createServer(app); 
+server = new Server(server);
 
 app.use(express.json())
 app.use(session)
@@ -39,15 +47,32 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
 
+app.use(express.static('public'))
+    
+const mensajesDAO = new MensajesdaosMongodb()
+
+
+
+io.on('connection',async (socket)=>{
+  const mensajes = await mensajesDAO.getAll()
+  socket.emit('mensaje', mensajes)
+
+  socket.on("nuevoMensaje",async (mensaje) =>{
+    mensajesDAO.save(mensaje)
+    mensajes.push(mensaje)
+    io.sockets.emit('mensaje',mensajes)
+    .then(()=>{
+        console.log('Registro mensaje Ok!!')
+    })
+    .catch((err)=>{
+        console.log(err)
+    })
+  })
+})
 
 
  const PORT= process.env.PORT||8080
-// console.log("process.env.PORT",process.env.PORT)
 
-// app.listen(PORT,()=>{
-//     logger.info("server OK!",PORT)
-// })
-const server = app.listen(process.env.PORT,() => {
-    const port = server.address().port;
-    console.log(`Server OK!! ${port}`);
+ server.listen(PORT,() => {
+    console.log(`Server OK!! ${PORT}`);
   });
